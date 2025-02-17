@@ -32,10 +32,7 @@ export class FindOwnersPage {
 	 * Verify if owner information is displayed
 	 */
 	async verifyOwnerInformation() {
-	  await this.page.waitForSelector(this.ownerInformationClass);
-	  await expect(this.page.locator(this.ownerInformationClass)).toContainText(this.ownerInformationTxt);
-
-
+	  await expect(this.page.getByText(this.ownerInformationTxt)).toBeVisible()
 	}
   
 	/**
@@ -44,8 +41,7 @@ export class FindOwnersPage {
 	async searchOwner(ownerLastName) {
 	  await this.page.type(this.lastNameInput, ownerLastName.lastName);
 	  await this.page.click(this.findOwnerBtn);
-	  await this.page.waitForSelector(this.ownerInformationClass);
-	  await expect(this.page.locator(this.ownerInformationClass)).toContainText(this.ownerResultTxt);
+	  await expect(this.page.getByText(this.ownerResultTxt)).toBeTruthy()
 
 	}
   }
