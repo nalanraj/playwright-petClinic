@@ -1,7 +1,7 @@
-const { expect } = require("@playwright/test");
+import { expect } from "@playwright/test";
 
 // @ts-check
-exports.FindOwnersPage = class FindOwnersPage {
+export class FindOwnersPage {
 	constructor(page) {
 	  this.page = page;
 	  this.url = '/owners/find';
@@ -33,7 +33,8 @@ exports.FindOwnersPage = class FindOwnersPage {
 	 */
 	async verifyOwnerInformation() {
 	  await this.page.waitForSelector(this.ownerInformationClass);
-	  await this.page.expect(this.ownerInformationClass).toContainText(this.ownerInformationTxt);
+	  await expect(this.page.locator(this.ownerInformationClass)).toContainText(this.ownerInformationTxt);
+
 
 	}
   
@@ -44,7 +45,8 @@ exports.FindOwnersPage = class FindOwnersPage {
 	  await this.page.type(this.lastNameInput, ownerLastName.lastName);
 	  await this.page.click(this.findOwnerBtn);
 	  await this.page.waitForSelector(this.ownerInformationClass);
-	  await this.page.expect(this.ownerInformationClass).toContainText(this.ownerResultTxt);
+	  await expect(this.page.locator(this.ownerInformationClass)).toContainText(this.ownerResultTxt);
+
 	}
-  };
+  }
   
